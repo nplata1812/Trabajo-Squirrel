@@ -1,16 +1,13 @@
 const requestURL =
   "https://gist.githubusercontent.com/josejbocanegra/b1873c6b7e732144355bb1627b6895ed/raw/d91df4c8093c23c41dce6292d5c1ffce0f01a68b/newDatalog.json";
-const request = new XMLHttpRequest();
+fetch(requestURL)
+  .then((response) => response.json())
+  .then((data) => {
+    popularEventos(data);
+    popularCorrelaciones(data);
+  });
 let eventosConcat = [];
 var dict = [];
-request.open("GET", requestURL);
-request.responseType = "json";
-request.send();
-request.onload = function () {
-  const datos = request.response;
-  popularEventos(datos);
-  popularCorrelaciones(datos);
-};
 
 function popularEventos(datos) {
   for (let index = 0; index < datos.length; index++) {
